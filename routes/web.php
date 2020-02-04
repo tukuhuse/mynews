@@ -21,3 +21,9 @@ Route::group(['prefix' => 'admin'], function() {
 
 //課題3
 route::get('/', 'Admin\AAAController@bbb');
+
+//課題4
+route::group(['prefix' => 'admin'], function() {
+  route::get('profile/create', 'Admin\ProfileController@add');
+  route::get('profile/edit', 'Admin\ProfileController@edit');
+});
