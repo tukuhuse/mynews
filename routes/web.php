@@ -19,9 +19,6 @@ Route::group(['prefix' => 'admin'], function() {
   Route::get('new/create', 'Admin\NewsController@add');
 });
 
-//課題3
-route::get('xxx', 'AAAController@bbb');
-
 //課題4
 route::group(['prefix' => 'admin'], function() {
   route::get('profile/create', 'Admin\ProfileController@add');
