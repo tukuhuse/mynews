@@ -23,11 +23,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   Route::get('profile/edit', 'Admin\ProfileController@edit');
 });
 
-//課題4
-route::group(['prefix' => 'admin'], function() {
-  route::get('profile/create', 'Admin\ProfileController@add');
-  route::get('profile/edit', 'Admin\ProfileController@edit');
-});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

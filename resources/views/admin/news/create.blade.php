@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 {{-- admin.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
-@section('title', 'ニューズの新規作成')
+@section('title', 'ニュースの新規作成')
 
 {{-- admin.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
@@ -21,7 +21,7 @@
           <div class="form-group row">
             <label class="col-md-2">タイトル</label>
             <div class="col-md-10">
-              <input type="text" class="formj-control" name="title" value="{{ old('title') }}">
+              <input type="text" class="formz-control" name="title" value="{{ old('title') }}">
             </div>
           </div>
           <div class="form-group row">
