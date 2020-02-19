@@ -21,37 +21,50 @@
           <div class="form-group row">
             <label class="col-md-2" for="name">氏名</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" name="name" value="{{ $profiles_form->name }}">
+              <input type="text" class="form-control" name="name" value="{{ $profile_form->name }}">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-2" for="gender">性別</label>
             <div class="col-md-10">
-              <input type="radio" name="gender" value="man" {{ $profiles_form->gender == "man" ? 'checked' : '' }} > 男   
-              <input type="radio" name="gender" value="woman" {{ $profiles_form->gender == "woman" ? 'checked' : '' }} > 女   
-              <input type="radio" name="gender" value="transgender" {{ $profiles_form->gender == "transgender" ? 'checked' : '' }} >どちらでもない
+              <input type="radio" name="gender" value="man" {{ $profile_form->gender == "man" ? 'checked' : '' }} > 男   
+              <input type="radio" name="gender" value="woman" {{ $profile_form->gender == "woman" ? 'checked' : '' }} > 女   
+              <input type="radio" name="gender" value="transgender" {{ $profile_form->gender == "transgender" ? 'checked' : '' }} >どちらでもない
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-2" for="hobby">趣味</label>
             <div class="col-md-10">
-              <input type="text" class="form-control" name="hobby" value="{{ $profiles_form->hobby }}">
+              <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby }}">
             </div>
           </div>
           <div class="form-group row">
             <label class="col-md-2" for="introduction">自己紹介欄</label>
             <div class="col-md-10">
-              <textarea class="form-control" name="introduction" rows="20">{{ $profiles_form->introduction }}</textarea>
+              <textarea class="form-control" name="introduction" rows="20">{{ $profile_form->introduction }}</textarea>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-md-10">
-              <input type="hidden" name="id" value="{{ $profiles_form->id }}">
+              <input type="hidden" name="id" value="{{ $profile_form->id }}">
               @csrf
               <input type="submit" class="btn btn-primary" value="更新">
             </div>
           </div>
         </form>
+        {{-- 編集履歴を表示 --}}
+        <div class="row mt-5">
+          <div class="col-md-4 mx-auto">
+            <h2>編集履歴</h2>
+            <ul class="list-group">
+              @if ($profile_form->histories != null)
+                @foreach ($profile_form->histories as $history)
+                  <li class="list-group-item">{{ $history->edited_at }}</li>
+                @endforeach
+              @endif
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>

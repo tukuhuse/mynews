@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Profile;
+use App\ProfileHistory;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
@@ -17,36 +19,42 @@ class ProfileController extends Controller
     public function create(Request $request) {
       $this->validate($request, Profile::$rules);
       
-      $profiles=new Profile;
+      $profile=new Profile;
       $form=$request->all();
       
       unset($form['_token']);
       
-      $profiles->fill($form);
-      $profiles->save();
+      $profile->fill($form);
+      $profile->save();
       
       return redirect('admin/profile/create');
     }
     
     public function edit(Request $request) {
-      $profiles=Profile::find($request->id);
-      if (empty($profiles)) {
+      $profile=Profile::find($request->id);
+      if (empty($profile)) {
         abort(404);
       }
-      return view('admin.profile.edit', ['profiles_form' => $profiles]);
+      return view('admin.profile.edit', ['profile_form' => $profile]);
     }
     
     public function update(Request $request) {
       //フォームデータ正規化
       $this->validate($request, Profile::$rules);
       //該当データを検索
-      $profiles=Profile::find($request->id);
+      $profile=Profile::find($request->id);
       //送信されてきたフォームデータを格納
-      $profiles_form=$profiles->all();
+      $profile_form=$profile->all();
       //いらないフォームデータを削除
-      unset($profiles_form['_token']);
+      unset($profile_form['_token']);
       
-      $profiles->fill($profiles_form)->save();
+      $profile->fill($profile_form)->save();
+      
+      //編集履歴を追加
+      $history=new ProfileHistory;
+      $history->profile_id=$profile->id;
+      $history->edited_at=Carbon::now();
+      $history->save();
       
       return redirect('admin/profile/edit');
     }
