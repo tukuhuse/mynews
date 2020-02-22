@@ -44,7 +44,7 @@ class ProfileController extends Controller
       //該当データを検索
       $profile=Profile::find($request->id);
       //送信されてきたフォームデータを格納
-      $profile_form=$profile->all();
+      $profile_form=$request->all();
       //いらないフォームデータを削除
       unset($profile_form['_token']);
       
@@ -56,6 +56,6 @@ class ProfileController extends Controller
       $history->edited_at=Carbon::now();
       $history->save();
       
-      return redirect('admin/profile/edit');
+      return back();
     }
 }
